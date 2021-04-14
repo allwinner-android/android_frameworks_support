@@ -319,6 +319,11 @@
         <!-- Default color for SectionHeader, by default same as defaultSearchColor -->
         <attr name="defaultSectionHeaderColor" format="reference|color" />
 
+        <!-- Style for StatusBarView -->
+        <attr name="statusBarViewStyle" format="reference"/>
+        <attr name="defaultIcon" format="reference" />
+
+
         <!-- Style for searchOrb -->
         <attr name="searchOrbViewStyle" format="reference"/>
         <attr name="defaultSearchIcon" format="reference" />

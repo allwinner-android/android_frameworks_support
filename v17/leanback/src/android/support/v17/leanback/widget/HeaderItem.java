@@ -14,6 +14,7 @@
 package android.support.v17.leanback.widget;
 
 import static android.support.v17.leanback.widget.ObjectAdapter.NO_ID;
+import android.graphics.drawable.Drawable;
 
 /**
  * A header item describes the metadata of a {@link Row}, such as a category
@@ -23,7 +24,17 @@ public class HeaderItem {
 
     private final long mId;
     private final String mName;
+    private Drawable mIcon;
     private CharSequence mContentDescription;
+    /**
+     * Create a header item.  All fields are optional.
+     */
+    public HeaderItem(long id, String name,Drawable icon) {
+        mId = id;
+        mName = name;
+	mIcon = icon;
+    }
+
 
     /**
      * Create a header item.  All fields are optional.
@@ -31,13 +42,14 @@ public class HeaderItem {
     public HeaderItem(long id, String name) {
         mId = id;
         mName = name;
+	mIcon = null;
     }
 
     /**
      * Create a header item.
      */
     public HeaderItem(String name) {
-        this(NO_ID, name);
+        this(NO_ID, name , null);
     }
 
     /**
@@ -50,10 +62,13 @@ public class HeaderItem {
     /**
      * Returns the name of this header item.
      */
-    public final String getName() {
+    public  String getName() {
         return mName;
     }
 
+    public final Drawable getIcon() {
+	return mIcon;
+    }
     /**
      * Returns optional content description for the HeaderItem.  When it is null, {@link #getName()}
      * should be used for the content description.

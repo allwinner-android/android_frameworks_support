@@ -293,7 +293,7 @@ public class ListRowPresenter extends RowPresenter {
      * disabled dimming on focus.
      */
     public ListRowPresenter() {
-        this(FocusHighlight.ZOOM_FACTOR_MEDIUM);
+        this(FocusHighlight.ZOOM_FACTOR_SMALL);
     }
 
     /**
@@ -395,6 +395,7 @@ public class ListRowPresenter extends RowPresenter {
      * set to 1.
      */
     public void setNumRows(int numRows) {
+        
         this.mNumRows = numRows;
     }
 
@@ -406,7 +407,7 @@ public class ListRowPresenter extends RowPresenter {
         if (mShadowOverlayHelper == null) {
             mShadowOverlayHelper = new ShadowOverlayHelper.Builder()
                     .needsOverlay(needsDefaultListSelectEffect())
-                    .needsShadow(needsDefaultShadow())
+                    .needsShadow(false)//needsDefaultShadow())
                     .needsRoundedCorner(areChildRoundedCornersEnabled())
                     .preferZOrder(isUsingZOrder(context))
                     .keepForegroundDrawable(mKeepChildForeground)
@@ -430,6 +431,7 @@ public class ListRowPresenter extends RowPresenter {
                 new OnChildSelectedListener() {
             @Override
             public void onChildSelected(ViewGroup parent, View view, int position, long id) {
+                
                 selectChildView(rowViewHolder, view, true);
             }
         });
@@ -485,8 +487,10 @@ public class ListRowPresenter extends RowPresenter {
      * Perform operations when a child of horizontal grid view is selected.
      */
     private void selectChildView(ViewHolder rowViewHolder, View view, boolean fireEvent) {
+        
         if (view != null) {
             if (rowViewHolder.mSelected) {
+                
                 ItemBridgeAdapter.ViewHolder ibh = (ItemBridgeAdapter.ViewHolder)
                         rowViewHolder.mGridView.getChildViewHolder(view);
 
@@ -495,11 +499,23 @@ public class ListRowPresenter extends RowPresenter {
                             rowViewHolder.mGridView, view, ibh.mItem);
                 }
                 if (fireEvent && rowViewHolder.getOnItemViewSelectedListener() != null) {
+                    
+////////////////////////////////////
+////////////////////////////////////
+//                    ((RowContainerView) vh.mContainerViewHolder.view).setForegroundColor(
+//                            vh.mColorDimmer.getPaint().getColor());
+//                    
+  ///////////////////////
+                    
+  ///////////////////////
+                    
+                    
                     rowViewHolder.getOnItemViewSelectedListener().onItemSelected(
                             ibh.mHolder, ibh.mItem, rowViewHolder, rowViewHolder.mRow);
                 }
             }
         } else {
+            
             if (mHoverCardPresenterSelector != null) {
                 rowViewHolder.mHoverCardViewSwitcher.unselect();
             }
@@ -588,6 +604,7 @@ public class ListRowPresenter extends RowPresenter {
 
     @Override
     protected void onRowViewSelected(RowPresenter.ViewHolder holder, boolean selected) {
+        
         super.onRowViewSelected(holder, selected);
         ViewHolder vh = (ViewHolder) holder;
         setVerticalPadding(vh);

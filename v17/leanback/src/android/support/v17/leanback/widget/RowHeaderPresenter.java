@@ -14,12 +14,13 @@
 package android.support.v17.leanback.widget;
 
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.support.v17.leanback.R;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import android.util.Log;
 /**
  * RowHeaderPresenter provides a default presentation for {@link HeaderItem} using a
  * {@link RowHeaderView}. If a subclass creates its own view, the subclass must also override
@@ -108,6 +109,14 @@ public class RowHeaderPresenter extends Presenter {
         } else {
             viewHolder.view.setVisibility(View.VISIBLE);
             ((RowHeaderView) viewHolder.view).setText(headerItem.getName());
+	     //if(headerItem.getIcon()!=null){
+		Log.d("IKE","set icon now");
+		Drawable icon = headerItem.getIcon();
+		if(icon!=null){
+		    icon.setBounds(0,0,icon.getMinimumWidth(),icon.getMinimumHeight());
+	     	    ((RowHeaderView) viewHolder.view).setCompoundDrawables(icon,null,null,null);
+		}
+	    // }
             viewHolder.view.setContentDescription(headerItem.getContentDescription());
         }
     }

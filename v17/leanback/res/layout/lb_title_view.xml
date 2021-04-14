@@ -22,17 +22,29 @@
         android:maxWidth="@dimen/lb_browse_title_icon_max_width"
         android:adjustViewBounds="true"
         android:layout_height="@dimen/lb_browse_title_icon_height"
-        android:layout_gravity="center_vertical|end"
+        android:layout_gravity="center_vertical|left"
         android:src="@null"
         android:visibility="gone"
         style="?attr/browseTitleIconStyle"/>
 
-    <TextView
-        android:id="@+id/title_text"
+    <!--原来显示logo用的，直接放中间显示时间 -->
+    <TextView  
+        android:id="@+id/title_text"   
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/lb_browse_title_height"
-        android:layout_gravity="center_vertical|end"
+        android:layout_height="@dimen/lb_browse_title_time_text_height"
+        android:layout_gravity="center_vertical|right"
+	android:layout_marginRight="146dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
         style="?attr/browseTitleTextStyle"/>
+
+    <android.support.v17.leanback.widget.StatusBarView
+	android:id="@+id/title_status"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+	android:layout_marginRight="0dp"
+	android:layout_gravity="center_vertical|right"/>
 
     <android.support.v17.leanback.widget.SearchOrbView
         android:id="@+id/title_orb"
@@ -40,6 +52,6 @@
         android:layout_width="wrap_content"
         android:transitionGroup="true"
         android:layout_gravity="center_vertical|start"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
 </merge>

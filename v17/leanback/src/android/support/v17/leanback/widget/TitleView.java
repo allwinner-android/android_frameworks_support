@@ -17,6 +17,7 @@ import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.support.v17.leanback.R;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -25,6 +26,9 @@ import android.widget.TextView;
 
 import static android.support.v17.leanback.widget.TitleViewAdapter.BRANDING_VIEW_VISIBLE;
 import static android.support.v17.leanback.widget.TitleViewAdapter.SEARCH_VIEW_VISIBLE;
+
+import java.security.PrivilegedActionException;
+
 import static android.support.v17.leanback.widget.TitleViewAdapter.FULL_VIEW_VISIBLE;
 
 /**
@@ -32,6 +36,7 @@ import static android.support.v17.leanback.widget.TitleViewAdapter.FULL_VIEW_VIS
  */
 public class TitleView extends FrameLayout implements TitleViewAdapter.Provider {
 
+    private static final String TAG = "TitleView";
     private ImageView mBadgeView;
     private TextView mTextView;
     private SearchOrbView mSearchOrbView;
@@ -95,7 +100,7 @@ public class TitleView extends FrameLayout implements TitleViewAdapter.Provider 
     }
 
     public TitleView(Context context, AttributeSet attrs) {
-        this(context, attrs, R.attr.browseTitleViewStyle);
+        this(context, attrs, R.attr.browseTitleViewStyle);//这个应用的style影响着padding的宽高等,在dimens.xml中lb_browse_padding_top
     }
 
     public TitleView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -117,7 +122,9 @@ public class TitleView extends FrameLayout implements TitleViewAdapter.Provider 
      */
     public void setTitle(CharSequence titleText) {
         mTextView.setText(titleText);
-        updateBadgeVisibility();
+        //updateBadgeVisibility();不要一直调用这个
+        if(mTextView.getVisibility() != View.VISIBLE)
+            mTextView.setVisibility(View.VISIBLE);
     }
 
     /**
@@ -149,6 +156,7 @@ public class TitleView extends FrameLayout implements TitleViewAdapter.Provider 
     public void setOnSearchClickedListener(View.OnClickListener listener) {
         mHasSearchListener = listener != null;
         mSearchOrbView.setOnOrbClickedListener(listener);
+        
         updateSearchOrbViewVisiblity();
     }
 
@@ -191,7 +199,7 @@ public class TitleView extends FrameLayout implements TitleViewAdapter.Provider 
      */
     public void updateComponentsVisibility(int flags) {
         this.flags = flags;
-
+        
         if ((flags & BRANDING_VIEW_VISIBLE) == BRANDING_VIEW_VISIBLE) {
             updateBadgeVisibility();
         } else {
@@ -204,18 +212,19 @@ public class TitleView extends FrameLayout implements TitleViewAdapter.Provider 
     private void updateSearchOrbViewVisiblity() {
         int visibility = mHasSearchListener && (flags & SEARCH_VIEW_VISIBLE) == SEARCH_VIEW_VISIBLE
                 ? View.VISIBLE : View.INVISIBLE;
+        
         mSearchOrbView.setVisibility(visibility);
     }
 
     private void updateBadgeVisibility() {
         Drawable drawable = mBadgeView.getDrawable();
+        
         if (drawable != null) {
             mBadgeView.setVisibility(View.VISIBLE);
-            mTextView.setVisibility(View.GONE);
         } else {
             mBadgeView.setVisibility(View.GONE);
-            mTextView.setVisibility(View.VISIBLE);
         }
+        mTextView.setVisibility(View.VISIBLE);//中间显示时间
     }
 
     @Override

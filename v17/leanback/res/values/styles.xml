@@ -25,7 +25,7 @@
 
     <style name="TextAppearance.Leanback.Title" parent="TextAppearance.Leanback">
         <item name="android:fontFamily">sans-serif-light</item>
-        <item name="android:textSize">@dimen/lb_browse_title_text_size</item>
+        <item name="android:textSize">@dimen/lb_browse_title_time_text_size</item>
         <item name="android:textColor">@color/lb_browse_title_color</item>
     </style>
 

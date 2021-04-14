@@ -15,11 +15,14 @@ package android.support.v17.leanback.widget;
 
 import android.support.v17.leanback.R;
 import android.support.v17.leanback.graphics.ColorOverlayDimmer;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.animation.TimeAnimator;
 import android.content.res.Resources;
+import android.graphics.Color;
+
 import static android.support.v17.leanback.widget.FocusHighlight.ZOOM_FACTOR_NONE;
 import static android.support.v17.leanback.widget.FocusHighlight.ZOOM_FACTOR_SMALL;
 import static android.support.v17.leanback.widget.FocusHighlight.ZOOM_FACTOR_XSMALL;
@@ -31,6 +34,7 @@ import static android.support.v17.leanback.widget.FocusHighlight.ZOOM_FACTOR_LAR
  */
 public class FocusHighlightHelper {
 
+    private static final String TAG = "FocusHighlightHelper";
     static boolean isValidZoomIndex(int zoomIndex) {
         return zoomIndex == ZOOM_FACTOR_NONE || getResId(zoomIndex) > 0;
     }
@@ -64,6 +68,7 @@ public class FocusHighlightHelper {
         private final ColorOverlayDimmer mDimmer;
 
         void animateFocus(boolean select, boolean immediate) {
+            
             endAnimation();
             final float end = select ? 1 : 0;
             if (immediate) {
@@ -76,16 +81,19 @@ public class FocusHighlightHelper {
         }
 
         FocusAnimator(View view, float scale, boolean useDimmer, int duration) {
+            
             mView = view;
             mDuration = duration;
             mScaleDiff = scale - 1f;
             if (view instanceof ShadowOverlayContainer) {
+                
                 mWrapper = (ShadowOverlayContainer) view;
             } else {
                 mWrapper = null;
             }
             mAnimator.setTimeListener(this);
             if (useDimmer) {
+                
                 mDimmer = ColorOverlayDimmer.createDefault(view.getContext());
             } else {
                 mDimmer = null;
@@ -93,11 +101,13 @@ public class FocusHighlightHelper {
         }
 
         void setFocusLevel(float level) {
+            
             mFocusLevel = level;
             float scale = 1f + mScaleDiff * level;
             mView.setScaleX(scale);
             mView.setScaleY(scale);
             if (mWrapper != null) {
+                
                 mWrapper.setShadowFocusLevel(level);
             } else {
                 ShadowOverlayHelper.setNoneWrapperShadowFocusLevel(mView, level);
@@ -158,16 +168,25 @@ public class FocusHighlightHelper {
 
         @Override
         public void onItemFocused(View view, boolean hasFocus) {
+            
             view.setSelected(hasFocus);
+            if(hasFocus){
+                view.setBackgroundColor(Color.parseColor("#00ffffff"));
+            }
+            else{
+                view.setBackgroundColor(Color.parseColor("#00000000"));
+            }
             getOrCreateAnimator(view).animateFocus(hasFocus, false);
         }
 
         @Override
         public void onInitializeView(View view) {
+            
             getOrCreateAnimator(view).animateFocus(false, true);
         }
 
         private FocusAnimator getOrCreateAnimator(View view) {
+            
             FocusAnimator animator = (FocusAnimator) view.getTag(R.id.lb_focus_animator);
             if (animator == null) {
                 animator = new FocusAnimator(
@@ -191,6 +210,7 @@ public class FocusHighlightHelper {
      */
     public static void setupBrowseItemFocusHighlight(ItemBridgeAdapter adapter, int zoomIndex,
             boolean useDimmer) {
+        
         adapter.setFocusHighlight(new BrowseItemFocusHighlight(zoomIndex, useDimmer));
     }
 

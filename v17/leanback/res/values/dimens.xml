@@ -17,10 +17,10 @@
 <resources>
     <dimen name="lb_list_row_height">224dp</dimen>
 
-    <dimen name="lb_browse_padding_start">56dp</dimen>
-    <dimen name="lb_browse_padding_top">27dp</dimen>
-    <dimen name="lb_browse_padding_end">56dp</dimen>
-    <dimen name="lb_browse_padding_bottom">48dp</dimen>
+    <dimen name="lb_browse_padding_start">45dp</dimen>
+    <dimen name="lb_browse_padding_top">30dp</dimen>
+    <dimen name="lb_browse_padding_end">45dp</dimen>
+    <dimen name="lb_browse_padding_bottom">30dp</dimen>
     <dimen name="lb_browse_rows_margin_start">238dp</dimen>
     <dimen name="lb_browse_rows_margin_top">167dp</dimen>
     <dimen name="lb_browse_rows_fading_edge">16dp</dimen>
@@ -30,6 +30,9 @@
     <dimen name="lb_browse_title_icon_max_width">584dp</dimen>
     <dimen name="lb_browse_title_icon_height">60dp</dimen>
     <dimen name="lb_browse_title_text_size">44sp</dimen>
+    
+    <dimen name="lb_browse_title_time_text_height">26dp</dimen>
+    <dimen name="lb_browse_title_time_text_size">16sp</dimen>
 
     <dimen name="lb_browse_headers_width">270dp</dimen>
     <integer name="lb_browse_headers_transition_delay">150</integer>
@@ -59,9 +62,9 @@
     <dimen name="lb_browse_expanded_row_no_hovercard_bottom_padding">28dp</dimen>
 
     <item name="lb_focus_zoom_factor_xsmall" type="fraction">106%</item>
-    <item name="lb_focus_zoom_factor_small" type="fraction">110%</item>
-    <item name="lb_focus_zoom_factor_medium" type="fraction">114%</item>
-    <item name="lb_focus_zoom_factor_large" type="fraction">118%</item>
+    <item name="lb_focus_zoom_factor_small" type="fraction">115%</item>
+    <item name="lb_focus_zoom_factor_medium" type="fraction">125%</item>
+    <item name="lb_focus_zoom_factor_large" type="fraction">130%</item>
 
     <dimen name="lb_details_overview_height_large">274dp</dimen>
     <dimen name="lb_details_overview_height_small">159dp</dimen>
@@ -165,7 +168,7 @@
     <dimen name="lb_error_under_message_baseline_margin">24dp</dimen>
 
     <item name="lb_view_active_level" type="fraction">0%</item>
-    <item name="lb_view_dimmed_level" type="fraction">60%</item>
+    <item name="lb_view_dimmed_level" type="fraction">0%</item>
 
     <!-- Search bar -->
     <dimen name="lb_search_bar_height">60dp</dimen>
